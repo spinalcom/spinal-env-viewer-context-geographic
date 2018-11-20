@@ -1,5 +1,5 @@
 {
-  "name": "spinal-env-viewer-contextManager",
+  "name": "spinal-env-viewer-context-geographic-Manager",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -13,8 +13,9 @@
     "spinal-env-viewer-context-menu-service": "git+https://github.com/spinalcom/spinal-env-viewer-context-menu-service.git",
     "spinal-env-viewer-panel-manager-service": "git+https://github.com/spinalcom/spinal-env-viewer-panel-manager-service.git",
     "spinal-env-viewer-panel-manager-service_spinalforgeextention": "git+https://github.com/spinalcom/spinal-env-viewer-panel-manager-service_spinalforgeextention.git",
-    "spinal-env-viewer-plugin-graph-manager-vue": "git+https://github.com/spinalcom/spinal-env-viewer-plugin-graph-manager-vue.git",
+    "spinal-env-viewer-plugin-graph-manager": "git+https://github.com/spinalcom/spinal-env-viewer-plugin-graph-manager.git#v02",
     "spinal-models-building-elements":"git+https://github.com/spinalcom/spinal-models-building-elements.git",
+    "spinal-env-viewer-plugin-bimobjectservice":"https://github.com/spinalcom/spinal-env-viewer-plugin-bimobjectservice.git",
     "vue": "^2.0.1"
   },
   "browserify": {

@@ -25,7 +25,6 @@ export default class ContextGeographic {
       "context",
       new AbstractElement(contextName)
     );
-
     _graph.addContext(contextGeo);
     return true;
   }
@@ -45,30 +44,24 @@ export default class ContextGeographic {
 
 
   addBuilding (parentNode, buildingName){
-    this.addAbstractElement(parentNode,buildingName,"hasBuilding");
+    this.addAbstractElement(parentNode,buildingName,"building");
   }
 
 
   addFloor (parentNode, floorName){
-    this.addAbstractElement(parentNode,floorName,"hasFloor");
+    this.addAbstractElement(parentNode,floorName,"floor");
 
   }
 
 
   addZone (parentNode, zoneName){
-    this.addAbstractElement(parentNode,zoneName,"hasZone");
+    this.addAbstractElement(parentNode,zoneName,"zone");
 
   }
 
 
   addRoom (parentNode, roomName){
-    this.addAbstractElement(parentNode,roomName,"hasRoom");
-
-  }
-
-
-  addBimElement (parentNode, childName, relationName){
-    
+    this.addAbstractElement(parentNode,roomName,"room");
 
   }
 

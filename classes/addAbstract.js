@@ -5,6 +5,10 @@ const {
 
 
 
+import bimobjService from 'spinal-env-viewer-plugin-bimobjectservice';
+
+
+
 class AddAbstactElement extends SpinalContextApp {
   constructor() {
     super(
@@ -17,6 +21,7 @@ class AddAbstactElement extends SpinalContextApp {
         fontColor: "#00FFFFFF"
       }
     );
+
   }
 
   getSelectedType(option) {
@@ -41,7 +46,12 @@ class AddAbstactElement extends SpinalContextApp {
     this.label = "add " + type;
     option["type"] = type;
 
-    return Promise.resolve(true);
+    if(type) {
+      return Promise.resolve(true);
+    }
+
+    return Promise.resolve(-1);
+    
   }
 
   action(option) {
@@ -57,7 +67,12 @@ class AddAbstactElement extends SpinalContextApp {
       };
       spinalPanelManagerService.openPanel("createContextDialog", dialogParams);
     } else {
-      console.log("add Equipment");
+      
+      var bimSelected = window.v.getSelection();
+      bimSelected.forEach(element => {
+        console.log(bimobjService.addBIMObject(option.context,option.selectedNode,element,"bimObject_" + element ));
+      });
+      
     }
   }
 }
