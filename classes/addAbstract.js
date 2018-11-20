@@ -63,7 +63,8 @@ class AddAbstactElement extends SpinalContextApp {
         title: `Add ${type}`,
         label: `Tape ${type} name`,
         type: type,
-        selectedNode: option.selectedNode
+        selectedNode: option.selectedNode,
+        context: option.context
       };
       spinalPanelManagerService.openPanel("createContextDialog", dialogParams);
     } else {

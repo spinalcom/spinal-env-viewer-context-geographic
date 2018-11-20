@@ -34,7 +34,8 @@ export default {
       title: "",
       label: "",
       type: "",
-      selectedNode: null
+      selectedNode: null,
+      context: null
     };
   },
   methods: {
@@ -45,7 +46,9 @@ export default {
       this.label = option.label;
       this.type = option.type;
       this.selectedNode = option.selectedNode;
+      this.context = option.context;
     },
+    
     async removed(option) {
       if (option.closeResult && option.inputValue.trim().length > 0) {
         if (typeof this.selectedNode === "undefined") {
@@ -53,7 +56,7 @@ export default {
             option.inputValue.trim()
           );
         } else {
-          utilities.addAbstractElement(this.selectedNode,option.inputValue,this.type);
+          utilities.addAbstractElement(this.context ,this.selectedNode,option.inputValue);
         }
       }
 
