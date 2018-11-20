@@ -69,8 +69,9 @@ class AddAbstactElement extends SpinalContextApp {
     } else {
       
       var bimSelected = window.v.getSelection();
+      
       bimSelected.forEach(element => {
-        console.log(bimobjService.addBIMObject(option.context,option.selectedNode,element,"bimObject_" + element ));
+        bimobjService.addBIMObject(option.context,option.selectedNode,element,"bimObject_" + element );
       });
       
     }

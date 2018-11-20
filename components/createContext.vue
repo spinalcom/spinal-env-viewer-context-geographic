@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import utilities from "../utilities.js";
+import utilities from "spinal-env-viewer-context-geographic-service";
 
 export default {
   name: "createContextDialog",
