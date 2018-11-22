@@ -17,6 +17,7 @@
     "spinal-models-building-elements":"git+https://github.com/spinalcom/spinal-models-building-elements.git",
     "spinal-env-viewer-plugin-bimobjectservice":"https://github.com/spinalcom/spinal-env-viewer-plugin-bimobjectservice.git",
     "spinal-env-viewer-context-geographic-service":"https://github.com/spinalcom/spinal-env-viewer-context-geographic-service.git",
+     "spinalgraph": "git+https://github.com/spinalcom/spinal-model-graph.git#v01",
     "vue": "^2.0.1"
   },
   "browserify": {
