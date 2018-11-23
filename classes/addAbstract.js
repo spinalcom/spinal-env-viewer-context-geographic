@@ -3,11 +3,9 @@ const {
   spinalPanelManagerService
 } = require("spinal-env-viewer-panel-manager-service");
 
+import bimobjService from "spinal-env-viewer-plugin-bimobjectservice";
 
-
-import bimobjService from 'spinal-env-viewer-plugin-bimobjectservice';
-
-
+import vue from "vue";
 
 class AddAbstactElement extends SpinalContextApp {
   constructor() {
@@ -21,7 +19,6 @@ class AddAbstactElement extends SpinalContextApp {
         fontColor: "#00FFFFFF"
       }
     );
-
   }
 
   getSelectedType(option) {
@@ -46,12 +43,11 @@ class AddAbstactElement extends SpinalContextApp {
     this.label = "add " + type;
     option["type"] = type;
 
-    if(type) {
+    if (type) {
       return Promise.resolve(true);
     }
 
     return Promise.resolve(-1);
-    
   }
 
   action(option) {
@@ -68,13 +64,16 @@ class AddAbstactElement extends SpinalContextApp {
       };
       spinalPanelManagerService.openPanel("createContextDialog", dialogParams);
     } else {
-      
       var bimSelected = window.v.getSelection();
-      
+
       bimSelected.forEach(element => {
-        bimobjService.addBIMObject(option.context,option.selectedNode,element,"bimObject_" + element );
+        bimobjService.addBIMObject(
+          option.context,
+          option.selectedNode,
+          element,
+          "bimObject_" + element
+        );
       });
-      
     }
   }
 }

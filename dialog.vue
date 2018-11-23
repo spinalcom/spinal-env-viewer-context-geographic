@@ -22,10 +22,14 @@
 </template>
 
 <script>
+import vue from "vue";
 import utilities from "spinal-env-viewer-context-geographic-service";
+import Toasted from "vue-toasted";
+
+vue.use(Toasted);
 
 export default {
-  name: "createContextDialog",
+  name: "dialogComponent",
   props: ["onFinised"],
   data() {
     return {
@@ -39,7 +43,6 @@ export default {
     };
   },
   methods: {
-    
     opened(option) {
       this.inputValue = option.inputValue;
       this.title = option.title;
@@ -48,15 +51,29 @@ export default {
       this.selectedNode = option.selectedNode;
       this.context = option.context;
     },
-    
+
     async removed(option) {
+      var success,
+        toastOption = {
+          position: "bottom-right",
+          duration: 3000
+        };
+
       if (option.closeResult && option.inputValue.trim().length > 0) {
         if (typeof this.selectedNode === "undefined") {
-          var contextIsCreated = await utilities.createContext(
-            option.inputValue.trim()
-          );
+          success = await utilities.createContext(option.inputValue.trim());
         } else {
-          utilities.addAbstractElement(this.context ,this.selectedNode,option.inputValue);
+          success = utilities.addAbstractElement(
+            this.context,
+            this.selectedNode,
+            option.inputValue
+          );
+        }
+
+        if (success) {
+          vue.toasted.success(" created with success", toastOption);
+        } else {
+          vue.toasted.error("an error occurred, try again later", toastOption);
         }
       }
 

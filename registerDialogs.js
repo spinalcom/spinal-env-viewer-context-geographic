@@ -1,5 +1,5 @@
 import vue from "vue";
-import createContextComponent from "./components/createContext.vue";
+import dialogComponent from "./dialog.vue";
 
 const {
   SpinalMountExtention
@@ -8,7 +8,7 @@ const {
 var dialogs = [
   {
     name: "createContextDialog",
-    vueMountComponent: vue.extend(createContextComponent),
+    vueMountComponent: vue.extend(dialogComponent),
     parentContainer: document.body
   }
 ];
