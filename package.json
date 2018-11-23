@@ -4,9 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "npm run create_viewer_env",
-    "create_viewer_env": "create_viewer_env -m"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
@@ -19,7 +17,9 @@
     "spinal-models-building-elements":"git+https://github.com/spinalcom/spinal-models-building-elements.git",
     "spinal-env-viewer-plugin-bimobjectservice":"https://github.com/spinalcom/spinal-env-viewer-plugin-bimobjectservice.git",
     "vue": "^2.0.1",
-    "vue-toasted": "^1.1.25"
+    "vue-toasted": "^1.1.25",
+    "spinal-env-viewer-context-geographic-service":"https://github.com/spinalcom/spinal-env-viewer-context-geographic-service.git",
+     "spinalgraph": "git+https://github.com/spinalcom/spinal-model-graph.git#v01",
   },
   "browserify": {
     "transform": [
