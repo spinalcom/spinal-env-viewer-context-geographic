@@ -61,7 +61,7 @@ class AddAbstactElement extends SpinalContextApp {
   action(option) {
     var type = option.type;
 
-    if (type !== "equipment") {
+    if (type !== EQUIPMENT_TYPE) {
       var dialogParams = {
         inputValue: "",
         title: `Add ${type}`,
