@@ -29,7 +29,7 @@ class AddAbstactElement extends SpinalContextApp {
 
   getSelectedType(option) {
     if (option && option.selectedNode) {
-      switch (parentType) {
+      switch (option.selectedNode.info.type.get()) {
         case CONTEXT_TYPE:
           return BUILDING_TYPE;
         case BUILDING_TYPE:
