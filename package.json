@@ -13,17 +13,14 @@
     "spinal-env-viewer-context-menu-service": "git+https://github.com/spinalcom/spinal-env-viewer-context-menu-service.git",
     "spinal-env-viewer-panel-manager-service": "git+https://github.com/spinalcom/spinal-env-viewer-panel-manager-service.git",
     "spinal-env-viewer-panel-manager-service_spinalforgeextention": "git+https://github.com/spinalcom/spinal-env-viewer-panel-manager-service_spinalforgeextention.git",
-    "spinal-env-viewer-plugin-graph-manager": "git+https://github.com/spinalcom/spinal-env-viewer-plugin-graph-manager.git#v02",
     "spinal-models-building-elements":"git+https://github.com/spinalcom/spinal-models-building-elements.git",
-    "spinal-env-viewer-plugin-bimobjectservice":"https://github.com/spinalcom/spinal-env-viewer-plugin-bimobjectservice.git",
-    "vue": "^2.0.1",
+    "spinal-env-viewer-plugin-bimobjectservice":"git+https://github.com/spinalcom/spinal-env-viewer-plugin-bimobjectservice.git",
     "vue-toasted": "^1.1.25",
-    "spinal-env-viewer-context-geographic-service":"https://github.com/spinalcom/spinal-env-viewer-context-geographic-service.git",
-     "spinalgraph": "git+https://github.com/spinalcom/spinal-model-graph.git#v01",
+    "spinal-env-viewer-context-geographic-service":"git+https://github.com/spinalcom/spinal-env-viewer-context-geographic-service.git",
+    "spinalgraph": "git+https://github.com/spinalcom/spinal-model-graph.git#v01",
   },
   "browserify": {
     "transform": [
-      "vueify",
       "babelify"
     ]
   }
