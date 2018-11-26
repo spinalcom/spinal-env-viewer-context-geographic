@@ -21,6 +21,7 @@
   },
   "browserify": {
     "transform": [
+      "vueify",
       "babelify"
     ]
   }
