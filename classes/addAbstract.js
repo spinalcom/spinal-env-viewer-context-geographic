@@ -5,7 +5,13 @@ const {
 
 import bimobjService from "spinal-env-viewer-plugin-bimobjectservice";
 
-import vue from "vue";
+const CONTEXT_TYPE = "geographic";
+const BUILDING_TYPE = "geographicBuilding";
+const FLOOR_TYPE = "geographicFloor";
+const ZONE_TYPE = "geographicZone";
+const ROOM_TYPE = "geographicRoom";
+const EQUIPMENT_TYPE = "geographicEquipment";
+
 
 class AddAbstactElement extends SpinalContextApp {
   constructor() {
@@ -23,17 +29,19 @@ class AddAbstactElement extends SpinalContextApp {
 
   getSelectedType(option) {
     if (option && option.selectedNode) {
-      switch (option.selectedNode.info.type.get()) {
-        case "context":
-          return "building";
-        case "building":
-          return "floor";
-        case "floor":
-          return "zone";
-        case "zone":
-          return "room";
-        case "room":
-          return "equipment";
+      switch (parentType) {
+        case CONTEXT_TYPE:
+          return BUILDING_TYPE;
+        case BUILDING_TYPE:
+          return FLOOR_TYPE
+        case FLOOR_TYPE:
+          return ZONE_TYPE
+        case ZONE_TYPE:
+          return ROOM_TYPE
+        case ROOM_TYPE:
+          return EQUIPMENT_TYPE
+        default:
+          return undefined;
       }
     }
   }
