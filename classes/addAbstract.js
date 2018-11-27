@@ -1,4 +1,6 @@
-const { SpinalContextApp } = require("spinal-env-viewer-context-menu-service");
+const {
+  SpinalContextApp
+} = require("spinal-env-viewer-context-menu-service");
 const {
   spinalPanelManagerService
 } = require("spinal-env-viewer-panel-manager-service");
@@ -17,8 +19,7 @@ class AddAbstactElement extends SpinalContextApp {
   constructor() {
     super(
       "add Child",
-      "This button add an abstract element (building, zone, floor or room)",
-      {
+      "This button add an abstract element (building, zone, floor or room)", {
         icon: "add",
         icon_type: "in",
         backgroundColor: "#FF0000",
@@ -51,7 +52,7 @@ class AddAbstactElement extends SpinalContextApp {
     this.label = "add " + type;
     option["type"] = type;
 
-    if (type) {
+    if (option.context.info.type.get() == CONTEXT_TYPE && type) {
       return Promise.resolve(true);
     }
 
