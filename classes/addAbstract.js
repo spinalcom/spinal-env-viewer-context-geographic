@@ -1,25 +1,16 @@
-const {
-  SpinalContextApp
-} = require("spinal-env-viewer-context-menu-service");
-const {
-  spinalPanelManagerService
-} = require("spinal-env-viewer-panel-manager-service");
+import {SpinalContextApp} from "spinal-env-viewer-context-menu-service";
+import {spinalPanelManagerService} from "spinal-env-viewer-panel-manager-service";
 
 import bimobjService from "spinal-env-viewer-plugin-bimobjectservice";
+import ContextGeographicService from "spinal-env-viewer-context-geographic-service";
 
-const CONTEXT_TYPE = "geographicContext";
-const BUILDING_TYPE = "geographicBuilding";
-const FLOOR_TYPE = "geographicFloor";
-const ZONE_TYPE = "geographicZone";
-const ROOM_TYPE = "geographicRoom";
-const EQUIPMENT_TYPE = "geographicEquipment";
-
+const constants = ContextGeographicService.constants;
 
 class AddAbstactElement extends SpinalContextApp {
   constructor() {
     super(
       "add Child",
-      "This button add an abstract element (building, zone, floor or room)", {
+      "This button adds an abstract element (building, zone, floor or room)", {
         icon: "add",
         icon_type: "in",
         backgroundColor: "#FF0000",
@@ -29,22 +20,13 @@ class AddAbstactElement extends SpinalContextApp {
   }
 
   getSelectedType(option) {
-    if (option && option.selectedNode) {
-      switch (option.selectedNode.info.type.get()) {
-        case CONTEXT_TYPE:
-          return BUILDING_TYPE;
-        case BUILDING_TYPE:
-          return FLOOR_TYPE
-        case FLOOR_TYPE:
-          return ZONE_TYPE
-        case ZONE_TYPE:
-          return ROOM_TYPE
-        case ROOM_TYPE:
-          return EQUIPMENT_TYPE
-        default:
-          return undefined;
-      }
+    if (!option || !option.selectedNode) {
+      return undefined;
     }
+    const type = option.selectedNode.getType().get();
+    const typeIndex = constants.GEOGRAPHIC_TYPES_ORDER.indexOf(type);
+
+    return constants.GEOGRAPHIC_TYPES_ORDER[typeIndex + 1];
   }
 
   isShown(option) {
@@ -52,7 +34,7 @@ class AddAbstactElement extends SpinalContextApp {
     this.label = "add " + type;
     option["type"] = type;
 
-    if (option.context.info.type.get() == CONTEXT_TYPE && type) {
+    if (option.context.info.type.get() == constants.CONTEXT_TYPE && type) {
       return Promise.resolve(true);
     }
 
@@ -62,11 +44,11 @@ class AddAbstactElement extends SpinalContextApp {
   action(option) {
     var type = option.type;
 
-    if (type !== EQUIPMENT_TYPE) {
+    if (type !== constants.EQUIPMENT_TYPE) {
       var dialogParams = {
         inputValue: "",
         title: `Add ${type}`,
-        label: `Tape ${type} name`,
+        label: `Enter ${type} name`,
         type: type,
         selectedNode: option.selectedNode,
         context: option.context
@@ -87,4 +69,4 @@ class AddAbstactElement extends SpinalContextApp {
   }
 }
 
-module.exports = AddAbstactElement;
+export default AddAbstactElement;

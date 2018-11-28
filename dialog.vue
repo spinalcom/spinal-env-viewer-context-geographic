@@ -1,4 +1,3 @@
-
 <template>
   <div>
     <md-dialog :md-active.sync="showDialog"
@@ -71,17 +70,18 @@ export default {
         }
 
         if (success) {
-          vue.toasted.success(" created with success", toastOption);
+          vue.toasted.success("Creation successful", toastOption);
         } else {
-          vue.toasted.error("an error occurred, try again later", toastOption);
+          vue.toasted.error("An error occurred, try again later", toastOption);
         }
       }
 
       this.showDialog = false;
     },
     closeDialog(closeResult) {
-      if (typeof this.onFinised === "function")
+      if (typeof this.onFinised === "function") {
         this.onFinised({ closeResult, inputValue: this.inputValue });
+      }
     }
   }
 };

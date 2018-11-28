@@ -1,4 +1,3 @@
-
 <template>
   <div>
     <md-dialog :md-active.sync="showDialog"
@@ -37,6 +36,8 @@
 </template>
 
 <script>
+import { SPINAL_RELATION_TYPE } from "spinalgraph";
+
 const DASHBOARD_CONTEXT = "Dashboard Standard";
 const RELATION_NAME = "hasDashBoard";
 
@@ -48,8 +49,8 @@ export default {
       selectedNode: null,
       context: null,
       showDialog: true,
-      choices : [],
-      radio : "",
+      choices: [],
+      radio: "",
       hasDash: false
     };
   },
@@ -60,68 +61,66 @@ export default {
       this.hasDash = this.hasDashBoard(option.selectedNode);
       this.getDashboardByType(option.selectedNode).then(el => {
         this.choices = el;
-      })
+      });
     },
-
     removed(option) {
-      if(option.closeResult) {
-        this.createRelation(this.selectedNode,this.context,RELATION_NAME,"Ref",(this.choices.find(el => el.name == this.radio)).node)
+      if (option.closeResult) {
+        this.createRelation(
+          this.selectedNode,
+          this.context,
+          RELATION_NAME,
+          SPINAL_RELATION_TYPE,
+          this.choices.find(el => el.name == this.radio).node
+        );
       }
       this.showDialog = false;
     },
     closeDialog(closeResult) {
-      if (typeof this.onFinised === "function")
-        this.onFinised({ closeResult });
+      if (typeof this.onFinised === "function") this.onFinised({ closeResult });
     },
-
     async getDashboardByType(selectedNode) {
       let mod = await window.spinal.spinalSystem.getModel();
-      if(mod.graph) {
+      if (mod.graph) {
         let context = await mod.graph.getContext(DASHBOARD_CONTEXT);
 
-        if(context) {
+        if (context) {
           var res = [];
 
           let children = await context.getChildren([RELATION_NAME]);
 
           children.forEach(element => {
-
-            if(element.info.type.get() == selectedNode.info.type.get()){
+            if (element.info.type.get() == selectedNode.info.type.get()) {
               res.push({
-              name : element.info.name.get(),
-              node : element
-            })}
+                name: element.info.name.get(),
+                node: element
+              });
+            }
           });
 
           return res;
-
         }
       }
-
     },
     hasDashBoard(selectedNode) {
-      if(selectedNode.hasRelation(RELATION_NAME,"Ref")) {
+      if (selectedNode.hasRelation(RELATION_NAME, SPINAL_RELATION_TYPE)) {
         return true;
       }
       return false;
     },
-    createRelation(node,context, relationName,relationType,child) {
-
-      if(node.hasRelation(relationName,relationType))
-        return;
+    createRelation(node, context, relationName, relationType, child) {
+      if (node.hasRelation(relationName, relationType)) return;
 
       node.addChildInContext(child, relationName, relationType, context);
-
     }
   }
 };
 </script>
 
 <style>
-  .choicesEmpty {
-    color: red;
-    width: 100%;
-    margin-bottom: 10px;
-    display: block;
-  }
+.choicesEmpty {
+  color: red;
+  width: 100%;
+  margin-bottom: 10px;
+  display: block;
+}
 </style>
