@@ -5,7 +5,10 @@ const {
   spinalPanelManagerService
 } = require("spinal-env-viewer-panel-manager-service");
 
-const CONTEXT_TYPE = "geographicContext";
+import ContextGeographicService from "spinal-env-viewer-context-geographic-service";
+
+
+const CONTEXT_TYPE = ContextGeographicService.constants.CONTEXT_TYPE;
 
 
 class LinkWithDashBoard extends SpinalContextApp {
