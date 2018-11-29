@@ -36,10 +36,11 @@
 </template>
 
 <script>
-import { SPINAL_RELATION_TYPE } from "spinalgraph";
-
+import * as graphLib from "spinalgraph";
 const DASHBOARD_CONTEXT = "Dashboard Standard";
 const RELATION_NAME = "hasDashBoard";
+const ENDPOINT_RELATION_NAME = "hasEndpoint";
+const { SpinalEndpoint } = require("spinal-models-bmsNetwork");
 
 export default {
   name: "linkToDashBoardDialog",
@@ -68,8 +69,8 @@ export default {
         this.createRelation(
           this.selectedNode,
           this.context,
-          RELATION_NAME,
-          SPINAL_RELATION_TYPE,
+          ENDPOINT_RELATION_NAME,
+          graphLib.SPINAL_RELATION_TYPE,
           this.choices.find(el => el.name == this.radio).node
         );
       }
@@ -102,15 +103,43 @@ export default {
       }
     },
     hasDashBoard(selectedNode) {
-      if (selectedNode.hasRelation(RELATION_NAME, SPINAL_RELATION_TYPE)) {
+      if (
+        selectedNode.hasRelation(
+          ENDPOINT_RELATION_NAME,
+          graphLib.SPINAL_RELATION_TYPE
+        )
+      ) {
         return true;
       }
       return false;
     },
-    createRelation(node, context, relationName, relationType, child) {
+
+    async createRelation(
+      node,
+      context,
+      relationName,
+      relationType,
+      dashboardSelected
+    ) {
       if (node.hasRelation(relationName, relationType)) return;
 
-      node.addChildInContext(child, relationName, relationType, context);
+      var sensor = (await dashboardSelected.getElement()).sensor.get();
+
+      sensor.forEach(attr => {
+        let child = new graphLib.SpinalNode(
+          dashboardSelected.info.name.get(),
+          dashboardSelected.info.type.get(),
+          new SpinalEndpoint(
+            attr.name,
+            "SpinalEndpoint",
+            attr.value,
+            attr.unit,
+            typeof attr.value
+          )
+        );
+
+        node.addChild(child, relationName, relationType);
+      });
     }
   }
 };
