@@ -1,4 +1,4 @@
-const HeaderBarName = "GraphManagerGlobalBar";
+const HeaderBarName = "GraphManagerTopBar";
 const sidebarName = "GraphManagerSideBar";
 
 import "./registerDialogs";
