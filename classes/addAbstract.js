@@ -23,7 +23,7 @@ class AddAbstactElement extends SpinalContextApp {
         icon: "add",
         icon_type: "in",
         backgroundColor: "#FF0000",
-        fontColor: "#00FFFFFF"
+        fontColor: "#FFFFFFF"
       }
     );
   }
