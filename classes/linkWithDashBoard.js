@@ -17,7 +17,7 @@ class LinkWithDashBoard extends SpinalContextApp {
       icon: "link",
       icon_type: "in",
       backgroundColor: "#FF0000",
-      fontColor: "#00FFFFFF"
+      fontColor: "#FFFFFF"
     });
   }
 
