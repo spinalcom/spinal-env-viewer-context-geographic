@@ -1,6 +1,6 @@
 import vue from "vue";
-import dialogComponent from "./dialog.vue";
-import linkToDashBoardDialog from './linkToDashBoardDialog.vue';
+import dialogComponent from "./vue/dialog.vue";
+import linkToDashBoardDialog from './vue/linkToDashBoardDialog.vue';
 const {
   SpinalMountExtention
 } = require("spinal-env-viewer-panel-manager-service");

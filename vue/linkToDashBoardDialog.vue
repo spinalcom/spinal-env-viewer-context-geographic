@@ -40,6 +40,7 @@ import * as graphLib from "spinalgraph";
 const DASHBOARD_CONTEXT = "Dashboard Standard";
 const RELATION_NAME = "hasDashBoard";
 const ENDPOINT_RELATION_NAME = "hasEndpoint";
+
 const { SpinalEndpoint } = require("spinal-models-bmsNetwork");
 
 export default {

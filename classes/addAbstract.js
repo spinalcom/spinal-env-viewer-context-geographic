@@ -1,10 +1,19 @@
-import {SpinalContextApp} from "spinal-env-viewer-context-menu-service";
-import {spinalPanelManagerService} from "spinal-env-viewer-panel-manager-service";
+import {
+  SpinalContextApp
+} from "spinal-env-viewer-context-menu-service";
+import {
+  spinalPanelManagerService
+} from "spinal-env-viewer-panel-manager-service";
 
 import bimobjService from "spinal-env-viewer-plugin-bimobjectservice";
 import ContextGeographicService from "spinal-env-viewer-context-geographic-service";
 
 const constants = ContextGeographicService.constants;
+import {
+  toasted
+} from "../toats";
+
+
 
 class AddAbstactElement extends SpinalContextApp {
   constructor() {
@@ -57,6 +66,11 @@ class AddAbstactElement extends SpinalContextApp {
     } else {
       var bimSelected = window.v.getSelection();
 
+      if (bimSelected.length === 0) {
+        toasted.error("no element has been selected, please select one ");
+        return;
+      }
+
       bimSelected.forEach(element => {
         bimobjService.addBIMObject(
           option.context,
@@ -65,6 +79,9 @@ class AddAbstactElement extends SpinalContextApp {
           "bimObject_" + element
         );
       });
+
+      toasted.success("success");
+
     }
   }
 }

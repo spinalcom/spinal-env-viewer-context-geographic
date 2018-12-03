@@ -21,11 +21,8 @@
 </template>
 
 <script>
-import vue from "vue";
 import utilities from "spinal-env-viewer-context-geographic-service";
-import Toasted from "vue-toasted";
-
-vue.use(Toasted);
+import { toasted } from "../toats";
 
 export default {
   name: "dialogComponent",
@@ -52,11 +49,7 @@ export default {
     },
 
     async removed(option) {
-      var success,
-        toastOption = {
-          position: "bottom-right",
-          duration: 3000
-        };
+      var success;
 
       if (option.closeResult && option.inputValue.trim().length > 0) {
         if (typeof this.selectedNode === "undefined") {
@@ -70,9 +63,9 @@ export default {
         }
 
         if (success) {
-          vue.toasted.success("Creation successful", toastOption);
+          toasted.success("Creation successful");
         } else {
-          vue.toasted.error("An error occurred, try again later", toastOption);
+          toasted.error("An error occurred, try again later");
         }
       }
 
