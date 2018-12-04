@@ -8,8 +8,7 @@ import {
 
 import CreateContextBtn from './classes/createContext';
 import AddAbstactElement from "./classes/addAbstract";
-import LinkWithDashBoard from "./classes/linkWithDashBoard";
+
 
 spinalContextMenuService.registerApp(HeaderBarName, new CreateContextBtn());
 spinalContextMenuService.registerApp(sidebarName, new AddAbstactElement());
-spinalContextMenuService.registerApp(sidebarName, new LinkWithDashBoard());
