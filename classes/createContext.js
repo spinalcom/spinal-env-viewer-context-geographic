@@ -15,21 +15,21 @@ class CreateContextBtn extends SpinalContextApp {
     });
   }
 
-  isShown(option) {
+  isShown() {
     return Promise.resolve(true);
   }
 
-  action(option) {
+  action() {
 
     // option.paramSent = "Create context";
 
-    var dialogParams = {
+    let dialogParams = {
       inputValue: "",
       title: "Create context",
       label: "Enter context name"
-    }
+    };
 
-    spinalPanelManagerService.openPanel('createContextDialog', dialogParams)
+    spinalPanelManagerService.openPanel( 'createContextDialog', dialogParams );
   }
 }
 

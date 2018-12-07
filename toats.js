@@ -1,11 +1,11 @@
-import vue from "vue";
+import Vue from "vue";
 import Toasted from "vue-toasted";
 
 
-vue.use(Toasted);
+Vue.use( Toasted );
 
 
-var option = {
+const option = {
   position: "top-center",
   duration: 3000
 };
@@ -14,16 +14,15 @@ var option = {
 let toasted = {
 
   success: function(message) {
-    vue.toasted.success(message, option);
+    Vue.toasted.success( message, option );
   },
 
   error: function(message) {
-    vue.toasted.error(message, option);
+    Vue.toasted.error( message, option );
   }
 
-
-}
+};
 
 export {
   toasted
-}
+};

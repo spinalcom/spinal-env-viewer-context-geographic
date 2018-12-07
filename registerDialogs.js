@@ -5,7 +5,7 @@ const {
   SpinalMountExtention
 } = require("spinal-env-viewer-panel-manager-service");
 
-var dialogs = [{
+const dialogs = [{
   name: "createContextDialog",
   vueMountComponent: vue.extend(dialogComponent),
   parentContainer: document.body

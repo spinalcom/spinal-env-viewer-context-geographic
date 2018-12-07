@@ -1,18 +1,11 @@
-import {
-  SpinalContextApp
-} from "spinal-env-viewer-context-menu-service";
-import {
-  spinalPanelManagerService
-} from "spinal-env-viewer-panel-manager-service";
+import { SpinalContextApp } from "spinal-env-viewer-context-menu-service";
+import { spinalPanelManagerService } from "spinal-env-viewer-panel-manager-service";
 
 import bimobjService from "spinal-env-viewer-plugin-bimobjectservice";
 import ContextGeographicService from "spinal-env-viewer-context-geographic-service";
+import { toasted } from "../toats";
 
 const constants = ContextGeographicService.constants;
-import {
-  toasted
-} from "../toats";
-
 
 
 class AddAbstactElement extends SpinalContextApp {
@@ -32,7 +25,7 @@ class AddAbstactElement extends SpinalContextApp {
     if (!option || !option.selectedNode) {
       return undefined;
     }
-    const type = option.selectedNode.getType().get();
+    const type = option.selectedNode.type.get();
     const typeIndex = constants.GEOGRAPHIC_TYPES_ORDER.indexOf(type);
 
     return constants.GEOGRAPHIC_TYPES_ORDER[typeIndex + 1];
@@ -43,7 +36,7 @@ class AddAbstactElement extends SpinalContextApp {
     this.label = "add " + type;
     option["type"] = type;
 
-    if (option.context.info.type.get() == constants.CONTEXT_TYPE && type) {
+    if (option.context.type.get() == constants.CONTEXT_TYPE && type) {
       return Promise.resolve(true);
     }
 
@@ -52,7 +45,6 @@ class AddAbstactElement extends SpinalContextApp {
 
   action(option) {
     var type = option.type;
-
     if (type !== constants.EQUIPMENT_TYPE) {
       var dialogParams = {
         inputValue: "",
