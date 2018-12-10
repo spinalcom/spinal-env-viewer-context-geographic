@@ -1,9 +1,15 @@
-import { SpinalContextApp } from "spinal-env-viewer-context-menu-service";
-import { spinalPanelManagerService } from "spinal-env-viewer-panel-manager-service";
+import {
+  SpinalContextApp
+} from "spinal-env-viewer-context-menu-service";
+import {
+  spinalPanelManagerService
+} from "spinal-env-viewer-panel-manager-service";
 
 import bimobjService from "spinal-env-viewer-plugin-bimobjectservice";
 import ContextGeographicService from "spinal-env-viewer-context-geographic-service";
-import { toasted } from "../toats";
+import {
+  toasted
+} from "../toats";
 
 const constants = ContextGeographicService.constants;
 
@@ -32,6 +38,7 @@ class AddAbstactElement extends SpinalContextApp {
   }
 
   isShown(option) {
+    console.log("option in isShown", option);
     var type = this.getSelectedType(option);
     this.label = "add " + type;
     option["type"] = type;
