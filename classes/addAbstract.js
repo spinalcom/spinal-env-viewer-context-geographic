@@ -5,7 +5,6 @@ import {
   spinalPanelManagerService
 } from "spinal-env-viewer-panel-manager-service";
 
-import bimobjService from "spinal-env-viewer-plugin-bimobjectservice";
 import ContextGeographicService from "spinal-env-viewer-context-geographic-service";
 import {
   toasted
@@ -71,11 +70,10 @@ class AddAbstactElement extends SpinalContextApp {
       }
 
       bimSelected.forEach(element => {
-        bimobjService.addBIMObject(
+        ContextGeographicService.addBimElement(
           option.context,
           option.selectedNode,
-          element,
-          "bimObject_" + element
+          element
         );
       });
 
