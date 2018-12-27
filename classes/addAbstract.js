@@ -37,7 +37,6 @@ class AddAbstactElement extends SpinalContextApp {
   }
 
   isShown(option) {
-    console.log("option in isShown", option);
     var type = this.getSelectedType(option);
     this.label = "add " + type;
     option["type"] = type;
