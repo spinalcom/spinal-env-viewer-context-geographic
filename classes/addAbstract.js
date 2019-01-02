@@ -18,7 +18,7 @@ class AddAbstactElement extends SpinalContextApp {
     super(
       "add Child",
       "This button adds an abstract element (building, zone, floor or room)", {
-        icon: "add",
+        icon: "add_location",
         icon_type: "in",
         backgroundColor: "#FF0000",
         fontColor: "#FFFFFF"

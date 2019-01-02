@@ -7,12 +7,13 @@ const {
 
 class CreateContextBtn extends SpinalContextApp {
   constructor() {
-    super("Create Context", "This button create a geographic context", {
-      icon: "add",
-      icon_type: "in",
-      backgroundColor: "#FF0000",
-      fontColor: "#FFFFFF"
-    });
+    super("Create Geographic Context",
+      "This button create a geographic context", {
+        icon: "location_city",
+        icon_type: "in",
+        backgroundColor: "#FF0000",
+        fontColor: "#FFFFFF"
+      });
   }
 
   isShown() {
@@ -29,7 +30,7 @@ class CreateContextBtn extends SpinalContextApp {
       label: "Enter context name"
     };
 
-    spinalPanelManagerService.openPanel( 'createContextDialog', dialogParams );
+    spinalPanelManagerService.openPanel('createContextDialog', dialogParams);
   }
 }
 
