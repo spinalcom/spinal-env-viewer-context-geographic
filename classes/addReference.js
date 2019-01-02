@@ -1,6 +1,5 @@
 import ContextGeographicService from "spinal-env-viewer-context-geographic-service";
 import {
-  SPINAL_RELATION_TYPE,
   SpinalGraphService
 } from "spinal-env-viewer-graph-service";
 
@@ -10,6 +9,9 @@ const {
   SpinalContextApp
 } = require("spinal-env-viewer-context-menu-service");
 
+import {
+  toasted
+} from "../toats";
 
 const constants = ContextGeographicService.constants;
 
@@ -28,10 +30,8 @@ class AddReferenceBtn extends SpinalContextApp {
 
     if (option.context.type.get() === constants.CONTEXT_TYPE && option.context
       .id.get() !== option.selectedNode.id.get()) {
-      console.log("visible");
       return Promise.resolve(true);
     }
-    console.log("not visible");
 
     return Promise.resolve(-1);
 
@@ -42,23 +42,21 @@ class AddReferenceBtn extends SpinalContextApp {
     let elementSelected = window.v.getSelection();
 
     if (elementSelected.length == 0) {
-      alert("no item selected");
+      toasted.error("no item selected");
+      return;
     }
 
-    elementSelected.forEach(async element => {
-      let node = await bimobjService.createBIMObject(element,
-        "bimObject_" +
-        element);
+    elementSelected.forEach(element => {
 
-      console.log("node", node);
+      let node = SpinalGraphService.getRealNode(option.selectedNode.id.get());
 
-      SpinalGraphService.addChildAndCreateNode(option.selectedNode.id.get(),
-        node,
-        constants.REFERENCE_RELATION,
-        SPINAL_RELATION_TYPE).then(el => {
-        if (el) console.log("yes");
-        else console.log("no");
-
+      bimobjService.addReferenceObject(node, element, "bimObject_" +
+        element).then(el => {
+        if (el) {
+          toasted.success("Reference added with success !");
+          return;
+        }
+        toasted.error("Reference is not added !");
       })
 
 
