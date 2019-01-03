@@ -12,7 +12,6 @@ import {
 
 const constants = ContextGeographicService.constants;
 
-
 class AddAbstactElement extends SpinalContextApp {
   constructor() {
     super(
@@ -77,7 +76,6 @@ class AddAbstactElement extends SpinalContextApp {
       });
 
       toasted.success("success");
-
     }
   }
 }
