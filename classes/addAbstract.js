@@ -69,13 +69,20 @@ class AddAbstactElement extends SpinalContextApp {
         return;
       }
 
-      bimSelected.forEach(element => {
-        ContextGeographicService.addBimElement(
-          option.context,
-          option.selectedNode,
-          element
-        );
-      });
+      window.v.model.getBulkProperties(bimSelected, {
+        propFilter: ['name']
+      }, (el) => {
+        el.forEach(element => {
+          ContextGeographicService.addBimElement(
+            option.context,
+            option.selectedNode,
+            element.name
+          );
+        });
+      })
+
+
+
 
       toasted.success("success");
     }

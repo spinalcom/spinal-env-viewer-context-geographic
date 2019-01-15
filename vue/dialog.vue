@@ -14,7 +14,8 @@
         <md-button class="md-primary"
                    @click="closeDialog(false)">Close</md-button>
         <md-button class="md-primary"
-                   @click="closeDialog(true)">Save</md-button>
+                   @click="closeDialog(true)"
+                   :disabled="!(inputValue.trim().length > 0)">Save</md-button>
       </md-dialog-actions>
     </md-dialog>
   </div>
@@ -40,7 +41,6 @@ export default {
   },
   methods: {
     opened(option) {
-      this.inputValue = option.inputValue;
       this.title = option.title;
       this.label = option.label;
       this.type = option.type;
