@@ -76,7 +76,7 @@ class AddAbstactElement extends SpinalContextApp {
           ContextGeographicService.addBimElement(
             option.context,
             option.selectedNode,
-            element.name
+            element
           );
         });
       })
