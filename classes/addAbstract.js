@@ -40,7 +40,9 @@ class AddAbstactElement extends SpinalContextApp {
     this.label = "add " + type;
     option["type"] = type;
 
-    if (option.context.type.get() == constants.CONTEXT_TYPE && type) {
+    if (constants.GEOGRAPHIC_TYPES_ORDER.indexOf(option.selectedNode.type.get()) !==
+      -1 &&
+      type) {
       return Promise.resolve(true);
     }
 
@@ -48,7 +50,6 @@ class AddAbstactElement extends SpinalContextApp {
   }
 
   action(option) {
-    console.log("option", option);
 
     var type = option.type;
     if (type !== constants.EQUIPMENT_TYPE) {
