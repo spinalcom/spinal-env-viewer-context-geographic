@@ -10,6 +10,6 @@ import CreateContextBtn from './classes/createContext';
 import AddAbstactElement from "./classes/addAbstract";
 import AddReferenceBtn from "./classes/addReference";
 
-spinalContextMenuService.registerApp(HeaderBarName, new CreateContextBtn());
-spinalContextMenuService.registerApp(sidebarName, new AddAbstactElement());
-spinalContextMenuService.registerApp(sidebarName, new AddReferenceBtn());
+spinalContextMenuService.registerApp(HeaderBarName, new CreateContextBtn(), [3]);
+spinalContextMenuService.registerApp(sidebarName, new AddAbstactElement(), [3]);
+spinalContextMenuService.registerApp(sidebarName, new AddReferenceBtn(), [3]);
