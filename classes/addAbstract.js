@@ -6,9 +6,9 @@ import {
 } from "spinal-env-viewer-panel-manager-service";
 
 import ContextGeographicService from "spinal-env-viewer-context-geographic-service";
-import {
-  toasted
-} from "../toats";
+// import {
+//   toasted
+// } from "../toats";
 
 const constants = ContextGeographicService.constants;
 
@@ -40,7 +40,8 @@ class AddAbstactElement extends SpinalContextApp {
     this.label = "add " + type;
     option["type"] = type;
 
-    if (constants.GEOGRAPHIC_TYPES_ORDER.indexOf(option.selectedNode.type.get()) !==
+    if (constants.GEOGRAPHIC_TYPES_ORDER.indexOf(option.selectedNode.type
+      .get()) !==
       -1 &&
       type) {
       return Promise.resolve(true);
@@ -61,12 +62,13 @@ class AddAbstactElement extends SpinalContextApp {
         selectedNode: option.selectedNode,
         context: option.context
       };
-      spinalPanelManagerService.openPanel("createContextDialog", dialogParams);
+      spinalPanelManagerService.openPanel("createContextDialog",
+      dialogParams);
     } else {
       var bimSelected = window.v.getSelection();
 
       if (bimSelected.length === 0) {
-        toasted.error("no element has been selected, please select one ");
+        // toasted.error("no element has been selected, please select one ");
         return;
       }
 
@@ -85,7 +87,7 @@ class AddAbstactElement extends SpinalContextApp {
 
 
 
-      toasted.success("success");
+      // toasted.success("success");
     }
   }
 }

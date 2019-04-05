@@ -9,9 +9,9 @@ const {
   SpinalContextApp
 } = require("spinal-env-viewer-context-menu-service");
 
-import {
-  toasted
-} from "../toats";
+// import {
+//   toasted
+// } from "../toats";
 
 const constants = ContextGeographicService.constants;
 
@@ -42,21 +42,22 @@ class AddReferenceBtn extends SpinalContextApp {
     let elementSelected = window.v.getSelection();
 
     if (elementSelected.length == 0) {
-      toasted.error("no item selected");
+      // toasted.error("no item selected");
       return;
     }
 
     elementSelected.forEach(element => {
 
-      let node = SpinalGraphService.getRealNode(option.selectedNode.id.get());
+      let node = SpinalGraphService.getRealNode(option.selectedNode.id
+        .get());
 
       bimobjService.addReferenceObject(node, element, "bimObject_" +
         element).then(el => {
         if (el) {
-          toasted.success("Reference added with success !");
+          // toasted.success("Reference added with success !");
           return;
         }
-        toasted.error("Reference is not added !");
+        // toasted.error("Reference is not added !");
       })
 
 

@@ -23,7 +23,7 @@
 
 <script>
 import utilities from "spinal-env-viewer-context-geographic-service";
-import { toasted } from "../toats";
+// import { toasted } from "../toats";
 
 export default {
   name: "dialogComponent",
@@ -49,6 +49,7 @@ export default {
     },
 
     async removed(option) {
+      // eslint-disable-next-line no-unused-vars
       var success;
 
       if (option.closeResult && option.inputValue.trim().length > 0) {
@@ -62,11 +63,11 @@ export default {
           );
         }
 
-        if (success) {
-          toasted.success("Creation successful");
-        } else {
-          toasted.error("An error occurred, try again later");
-        }
+        // if (success) {
+        //   toasted.success("Creation successful");
+        // } else {
+        //   toasted.error("An error occurred, try again later");
+        // }
       }
 
       this.showDialog = false;

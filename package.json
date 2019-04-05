@@ -15,7 +15,6 @@
     "spinal-env-viewer-panel-manager-service_spinalforgeextention": "git+https://github.com/spinalcom/spinal-env-viewer-panel-manager-service_spinalforgeextention.git",
     "spinal-models-building-elements": "git+https://github.com/spinalcom/spinal-models-building-elements.git",
     "spinal-env-viewer-plugin-bimobjectservice": "git+https://github.com/spinalcom/spinal-env-viewer-plugin-bimobjectservice.git",
-    "vue-toasted": "^1.1.25",
     "spinal-env-viewer-context-geographic-service": "git+https://github.com/spinalcom/spinal-env-viewer-context-geographic-service.git",
     "spinal-model-bmsnetwork": "https://github.com/spinalcom/spinal-model-bmsnetwork.git"
   },
