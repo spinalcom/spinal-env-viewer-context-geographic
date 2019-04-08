@@ -23,7 +23,7 @@
 
 <script>
 import utilities from "spinal-env-viewer-context-geographic-service";
-// import { toasted } from "../toats";
+//import { toasted } from "../toats";
 
 export default {
   name: "dialogComponent",
