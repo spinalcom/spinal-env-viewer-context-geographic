@@ -51,7 +51,7 @@ class AddAbstactElement extends SpinalContextApp {
   }
 
   action(option) {
-
+    const viewer = window.spinal.ForgeViewer.viewer;
     var type = option.type;
     if (type !== constants.EQUIPMENT_TYPE) {
       var dialogParams = {
@@ -63,30 +63,28 @@ class AddAbstactElement extends SpinalContextApp {
         context: option.context
       };
       spinalPanelManagerService.openPanel("createContextDialog",
-      dialogParams);
+        dialogParams);
     } else {
-      var bimSelected = window.v.getSelection();
+      var bimSelected = viewer.getAggregateSelection();
 
       if (bimSelected.length === 0) {
         // toasted.error("no element has been selected, please select one ");
         return;
       }
-
-      window.v.model.getBulkProperties(bimSelected, {
-        propFilter: ['name']
-      }, (el) => {
-        el.forEach(element => {
-          ContextGeographicService.addBimElement(
-            option.context,
-            option.selectedNode,
-            element
-          );
+      for (let idx = 0; idx < bimSelected.length; idx++) {
+        const { model, selection } = bimSelected[idx];
+        model.getBulkProperties(selection, {
+          propFilter: ['name']
+        }, (el) => {
+          el.forEach(element => {
+            ContextGeographicService.addBimElement(
+              option.context,
+              option.selectedNode,
+              element
+            );
+          });
         });
-      })
-
-
-
-
+      }
       // toasted.success("success");
     }
   }
