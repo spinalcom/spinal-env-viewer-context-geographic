@@ -41,7 +41,7 @@ class AddAbstactElement extends SpinalContextApp {
     option["type"] = type;
 
     if (constants.GEOGRAPHIC_TYPES_ORDER.indexOf(option.selectedNode.type
-      .get()) !==
+        .get()) !==
       -1 &&
       type) {
       return Promise.resolve(true);
@@ -71,16 +71,25 @@ class AddAbstactElement extends SpinalContextApp {
         // toasted.error("no element has been selected, please select one ");
         return;
       }
+
+
       for (let idx = 0; idx < bimSelected.length; idx++) {
-        const { model, selection } = bimSelected[idx];
+        const {
+          model,
+          selection
+        } = bimSelected[idx];
+
+
         model.getBulkProperties(selection, {
           propFilter: ['name']
         }, (el) => {
+
           el.forEach(element => {
             ContextGeographicService.addBimElement(
               option.context,
               option.selectedNode,
-              element
+              element,
+              model
             );
           });
         });
