@@ -1,9 +1,10 @@
 import ContextGeographicService from "spinal-env-viewer-context-geographic-service";
-import {
-  SpinalGraphService
-} from "spinal-env-viewer-graph-service";
+// import {
+//   SpinalGraphService
+// } from "spinal-env-viewer-graph-service";
 
-import bimobjService from 'spinal-env-viewer-plugin-bimobjectservice';
+// import bimobjService from 'spinal-env-viewer-plugin-bimobjectservice';
+const bimobjService = window.spinal.BimObjectService;
 
 const {
   SpinalContextApp
@@ -39,31 +40,51 @@ class AddReferenceBtn extends SpinalContextApp {
   }
 
   action(option) {
-    let elementSelected = window.v.getSelection();
+    let elementSelected = window.spinal.ForgeViewer.viewer
+      .getAggregateSelection();
 
     if (elementSelected.length == 0) {
       // toasted.error("no item selected");
       return;
     }
 
-    elementSelected.forEach(element => {
+    for (let idx = 0; idx < elementSelected.length; idx++) {
+      const {
+        model,
+        selection
+      } = elementSelected[idx];
 
-      let node = SpinalGraphService.getRealNode(option.selectedNode.id
-        .get());
-
-      bimobjService.addReferenceObject(node, element, "bimObject_" +
-        element).then(el => {
-        if (el) {
-          // toasted.success("Reference added with success !");
-          return;
+      model.getBulkProperties(
+        selection, {
+          propFilter: ["name"]
+        },
+        el => {
+          el.forEach(element => {
+            bimobjService.addReferenceObject(option.selectedNode.id
+              .get(), element.dbId, element.name, model);
+          });
         }
-        // toasted.error("Reference is not added !");
-      })
+      );
+    }
+
+    // elementSelected.forEach(element => {
+
+    // let node = SpinalGraphService.getRealNode(option.selectedNode.id
+    //   .get());
+
+    // bimobjService.addReferenceObject(node, element, "bimObject_" +
+    //   element).then(el => {
+    //   if (el) {
+    //     // toasted.success("Reference added with success !");
+    //     return;
+    //   }
+    //   // toasted.error("Reference is not added !");
+    // })
 
 
 
 
-    });
+    // });
 
 
 
