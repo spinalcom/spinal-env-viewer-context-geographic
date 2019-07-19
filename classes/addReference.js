@@ -60,7 +60,8 @@ class AddReferenceBtn extends SpinalContextApp {
         },
         el => {
           el.forEach(element => {
-            bimobjService.addReferenceObject(option.selectedNode.id
+            window.spinal.BimObjectService.addReferenceObject(option
+              .selectedNode.id
               .get(), element.dbId, element.name, model);
           });
         }
