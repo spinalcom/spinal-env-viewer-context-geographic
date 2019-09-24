@@ -55,19 +55,21 @@ export default {
       if (option.closeResult && option.inputValue.trim().length > 0) {
         if (typeof this.selectedNode === "undefined") {
           success = await utilities.createContext(option.inputValue.trim());
-        } else {
-          success = utilities.addAbstractElement(
-            this.context,
-            this.selectedNode,
-            option.inputValue
-          );
         }
 
-        // if (success) {
-        //   toasted.success("Creation successful");
-        // } else {
-        //   toasted.error("An error occurred, try again later");
+        // else {
+        // success = utilities.addAbstractElement(
+        // this.context,
+        // this.selectedNode,
+        // option.inputValue
+        // );
         // }
+
+        // // if (success) {
+        // //   toasted.success("Creation successful");
+        // // } else {
+        // //   toasted.error("An error occurred, try again later");
+        // // }
       }
 
       this.showDialog = false;

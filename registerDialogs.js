@@ -1,5 +1,6 @@
 import vue from "vue";
 import dialogComponent from "./vue/dialog.vue";
+import addChildDialogComponent from "./vue/addChildDialog.vue";
 
 const {
   SpinalMountExtention
@@ -8,6 +9,10 @@ const {
 const dialogs = [{
   name: "createContextDialog",
   vueMountComponent: vue.extend(dialogComponent),
+  parentContainer: document.body
+}, {
+  name: "addChildDialog",
+  vueMountComponent: vue.extend(addChildDialogComponent),
   parentContainer: document.body
 }];
 
