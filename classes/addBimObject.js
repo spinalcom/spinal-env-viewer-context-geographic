@@ -20,11 +20,17 @@ class AddBimObjects extends SpinalContextApp {
   }
 
   isShown(option) {
+    let contextType = option.context.type.get();
     let typeSelected = option.selectedNode.type.get();
 
-    let index = constants.GEOGRAPHIC_TYPES_ORDER.indexOf(typeSelected);
+    if (contextType === constants.CONTEXT_TYPE && typeSelected !== constants
+      .EQUIPMENT_TYPE) {
+      return Promise.resolve(true)
+    }
 
-    return Promise.resolve(index);
+    // let index = constants.GEOGRAPHIC_TYPES_ORDER.indexOf(typeSelected);
+
+    return Promise.resolve(-1);
 
   }
 
