@@ -4,7 +4,7 @@ import ContextGeographicService from "spinal-env-viewer-context-geographic-servi
 // } from "spinal-env-viewer-graph-service";
 
 // import bimobjService from 'spinal-env-viewer-plugin-bimobjectservice';
-const bimobjService = window.spinal.BimObjectService;
+// const bimobjService = window.spinal.BimObjectService;
 
 const {
   SpinalContextApp
@@ -29,8 +29,9 @@ class AddReferenceBtn extends SpinalContextApp {
 
   isShown(option) {
 
-    if (option.context.type.get() === constants.CONTEXT_TYPE && option.context
-      .id.get() !== option.selectedNode.id.get()) {
+    if (option.context.type.get() === constants.CONTEXT_TYPE &&
+     option.context.id.get() !== option.selectedNode.id.get() &&
+     option.selectedNode.type.get() !== constants.EQUIPMENT_TYPE) {
       return Promise.resolve(true);
     }
 
@@ -60,9 +61,8 @@ class AddReferenceBtn extends SpinalContextApp {
         },
         el => {
           el.forEach(element => {
-            window.spinal.BimObjectService.addReferenceObject(option
-              .selectedNode.id
-              .get(), element.dbId, element.name, model);
+            window.spinal.BimObjectService.addReferenceObject(
+              option.selectedNode.id.get(), element.dbId, element.name, model);
           });
         }
       );

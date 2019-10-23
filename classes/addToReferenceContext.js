@@ -1,6 +1,4 @@
-import {
-  SpinalContextApp
-} from "spinal-env-viewer-context-menu-service";
+import {SpinalContextApp} from "spinal-env-viewer-context-menu-service";
 
 import geographicService from "spinal-env-viewer-context-geographic-service";
 
@@ -11,13 +9,13 @@ class AddToReference extends SpinalContextApp {
       icon_type: "in",
       backgroundColor: "#FF00000",
       fontColor: "#FFFFFF"
-    })
+    });
   }
 
   isShown(option) {
     if (option.context.type.get() === option.selectedNode.type.get() &&
       option.selectedNode.type.get() === geographicService.constants
-      .CONTEXT_TYPE
+        .CONTEXT_TYPE
     ) {
       return Promise.resolve(true);
     }
