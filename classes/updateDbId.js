@@ -27,7 +27,6 @@ const geoRelations = [
 ];
 
 async function updateBimObjectId(context) {
-  ​
     const mapModelExternId = new Map();
     function getExternalIdMapping(model) {
       if (mapModelExternId.has(model)) return mapModelExternId.get(model);
@@ -39,7 +38,6 @@ async function updateBimObjectId(context) {
       mapModelExternId.set(model, prom)
       return prom;
     }
-  ​
     const geoRelations = [
       SITE_RELATION,
       BUILDING_RELATION,
