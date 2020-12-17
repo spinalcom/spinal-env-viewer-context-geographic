@@ -1,3 +1,27 @@
+/*
+ * Copyright 2020 SpinalCom - www.spinalcom.com
+ *
+ * This file is part of SpinalCore.
+ *
+ * Please read all of the following terms and conditions
+ * of the Free Software license Agreement ("Agreement")
+ * carefully.
+ *
+ * This Agreement is a legally binding contract between
+ * the Licensee (as defined below) and SpinalCom that
+ * sets forth the terms and conditions that govern your
+ * use of the Program. By installing and/or using the
+ * Program, you agree to abide by all the terms and
+ * conditions stated or referenced herein.
+ *
+ * If you do not agree to abide by these terms and
+ * conditions, do not demonstrate your acceptance and do
+ * not install or use the Program.
+ * You should have received a copy of the license along
+ * with this file. If not, see
+ * <http://resources.spinalcom.com/licenses.pdf>.
+ */
+
 import ContextGeographicService from "spinal-env-viewer-context-geographic-service";
 // import {
 //   SpinalGraphService
@@ -9,6 +33,7 @@ import ContextGeographicService from "spinal-env-viewer-context-geographic-servi
 const {
   SpinalContextApp
 } = require("spinal-env-viewer-context-menu-service");
+import { spinalPanelManagerService } from "spinal-env-viewer-panel-manager-service";
 
 // import {
 //   toasted
@@ -23,47 +48,41 @@ const geoRelations = [
   constants.FLOOR_RELATION,
   constants.ROOM_RELATION,
   constants.EQUIPMENT_RELATION,
-  constants.REFERENCE_RELATION
+  constants.REFERENCE_RELATION,
+  `${constants.REFERENCE_RELATION}.ROOM`
 ];
 
 async function updateBimObjectId(context) {
-    const mapModelExternId = new Map();
-    function getExternalIdMapping(model) {
-      if (mapModelExternId.has(model)) return mapModelExternId.get(model);
-      const prom = new Promise((resolve) => {
-        model.getExternalIdMapping((map) => {
-          resolve(map)
-        })
-      })
-      mapModelExternId.set(model, prom)
-      return prom;
-    }
-    const geoRelations = [
-      SITE_RELATION,
-      BUILDING_RELATION,
-      ZONE_RELATION,
-      FLOOR_RELATION,
-      ROOM_RELATION,
-      EQUIPMENT_RELATION,
-      REFERENCE_RELATION
-    ]
-    const bimObjects = await context.find(geoRelations, (node) => {
-      return node.info.type.get() === EQUIPMENT_TYPE
-    })
-    const updated = [];
-    for (const bimObj of bimObjects) {
-      const bimFileId = bimObj.info.bimFileId.get();
-      const model = spinal.BimObjectService.getModelByBimfile(bimFileId);
-      const externalIdMapping = await getExternalIdMapping(model);
-      const externalId = bimObj.info.externalId.get()
-      if (bimObj.info.dbid.get() !== externalIdMapping[externalId]) {
-        updated.push(externalIdMapping[externalId])
-        bimObj.info.dbid.set(externalIdMapping[externalId])
-      }
-    }
-    console.log("End");
+  const mapModelExternId = new Map();
+  function getExternalIdMapping(model) {
+    if (mapModelExternId.has(model)) return mapModelExternId.get(model);
+    const prom = new Promise((resolve) => {
+      model.getExternalIdMapping((map) => {
+        resolve(map);
+      });
+    });
+    mapModelExternId.set(model, prom);
+    return prom;
   }
-  
+  const bimObjects = await context.find(geoRelations, (node) => {
+    return node.info.type.get() === constants.EQUIPMENT_TYPE;
+  });
+  const updated = [];
+  for (const bimObj of bimObjects) {
+    const bimFileId = bimObj.info.bimFileId.get();
+    const model = spinal.BimObjectService.getModelByBimfile(bimFileId);
+    const externalIdMapping = await getExternalIdMapping(model);
+    const externalId = bimObj.info.externalId.get();
+    if (bimObj.info.dbid.get() !== externalIdMapping[externalId]) {
+      updated.push(externalIdMapping[externalId]);
+      bimObj.info.dbid.set(externalIdMapping[externalId]);
+    }
+  }
+  spinalPanelManagerService.openPanel("notificationDialog",
+    { msg: "update done", time: 2000 });
+  console.log("End");
+}
+
 
 class UpdateDbId extends SpinalContextApp {
   constructor() {
@@ -78,7 +97,7 @@ class UpdateDbId extends SpinalContextApp {
   isShown(option) {
 
     if (option.context.type.get() === constants.CONTEXT_TYPE &&
-     option.context.id.get() === option.selectedNode.id.get()) {
+      option.context.id.get() === option.selectedNode.id.get()) {
       return Promise.resolve(true);
     }
 
@@ -88,8 +107,8 @@ class UpdateDbId extends SpinalContextApp {
   }
 
   action(option) {
-    const node = spinal.spinalGraphService.getRealNode(option.selectedNode.id.get())
-    return updateBimObjectId(node)
+    const node = spinal.spinalGraphService.getRealNode(option.selectedNode.id.get());
+    return updateBimObjectId(node);
     // let elementSelected = window.spinal.ForgeViewer.viewer
     //   .getAggregateSelection();
 
